@@ -1,0 +1,67 @@
+<div class="container">
+  <div class="col">
+    <div class="card pt-lg-4 pl-3 pb-lg-2 bg-light">
+      <h2>Cadastro de % de Comparecimento por Dia da Semana</h2>
+    </div>
+    <div class="card mt-3">
+      <div class="card-body">
+        <div class="form-row">
+          <div class="form-group col">
+            <label class="control-label" for="diaSemana">Dia da Semana</label>
+            <select class="form-control" id="idade" name="diaSemana" required [(ngModel)]="diaSemanaPI.dia">
+              <option value="" selected disabled>Selecione</option>
+              <option *ngFor="let dia of diasDaSemanaSelect">{{ dia }}</option>
+            </select>
+          </div>
+          <div class="form-group col">
+            <label class="control-label" for="pi">% PI</label>
+            <input id="pi" name="piDeComparecimento" class="form-control" required maxlength="3" max="100"
+              [(ngModel)]="diaSemanaPI.piDeComparecimento" #pi="ngModel">
+            <div *ngIf="pi.invalid && (pi.dirty || pi.touched)" class="alert alert-danger">
+              <div *ngIf="pi.errors.required">
+                Campo % PI é obrigatório.
+              </div>
+              <div *ngIf="pi.errors.maxlength">
+                Idade deve conter no máximo 3 caracteres
+              </div>
+              <div *ngIf="pi.errors.max">
+                Valor máximo permitido é 100%.
+              </div>
+            </div>
+          </div>
+        </div>
+        <button (click)="add(diaSemanaPI)" class="btn btn-success">Criar</button>
+      </div>
+    </div>
+
+    <div class="card mt-3">
+      <div class="card-header">
+        Registros Cadastrados
+      </div>
+      <div class="card-body">
+        <table id="myTable" class="table" cellspacing="0">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Dia da Semana</th>
+              <th>% de Comparecimento</th>
+              <th>Remover</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let diaSemana of dias">
+              <td>{{diaSemana.id}}</td>
+              <td>{{diaSemana.dia}}</td>
+              <td>{{diaSemana.piDeComparecimento}}</td>
+              <td>
+                <button class="btn btn-danger" (click)="deletar(diaSemana);">
+                  Deletar
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

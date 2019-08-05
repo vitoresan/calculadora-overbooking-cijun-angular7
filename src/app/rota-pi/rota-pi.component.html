@@ -1,0 +1,90 @@
+<div class="container">
+  <div class="col">
+    <div class="card pt-lg-4 pl-3 pb-lg-2 bg-light">
+      <h2>Cadastro de % de Comparecimento por Rota</h2>
+    </div>
+    <div class="card mt-3">
+      <div class="card-body">
+        <div class="form-row">
+          <div class="form-group col">
+            <label class="control-label" for="aeroportoOrigem">Aeroporto de Origem</label>
+            <input id="aeroportoOrigem" name="aeroportoOrigem" class="form-control" required maxlength="3"
+              [(ngModel)]="rotaPI.aeroportoOrigem" #aeroportoOrigem="ngModel">
+            <div *ngIf="aeroportoOrigem.invalid && (aeroportoOrigem.dirty || aeroportoOrigem.touched)"
+              class="alert alert-danger">
+              <div *ngIf="aeroportoOrigem.errors.required">
+                Campo Aeroporto de Origem é obrigatório.
+              </div>
+              <div *ngIf="aeroportoOrigem.errors.maxlength">
+                Informe a sigla do aeroporto. Ex. GRU
+              </div>
+            </div>
+          </div>
+          <div class="form-group col">
+            <label class="control-label" for="aeroportoDestino">Aeroporto de Destino</label>
+            <input id="aeroportoDestino" name="aeroportoDestino" class="form-control" required maxlength="3"
+              [(ngModel)]="rotaPI.aeroportoDestino" #aeroportoDestino="ngModel">
+            <div *ngIf="aeroportoDestino.invalid && (aeroportoDestino.dirty || aeroportoDestino.touched)"
+              class="alert alert-danger">
+              <div *ngIf="aeroportoDestino.errors.required">
+                Campo Aeroporto de Origem é obrigatório.
+              </div>
+              <div *ngIf="aeroportoDestino.errors.maxlength">
+                Informe a sigla do aeroporto. Ex. GRU
+              </div>
+            </div>
+          </div>
+          <div class="form-group col">
+            <label class="control-label" for="pi">% PI</label>
+            <input id="pi" name="piDeComparecimento" class="form-control" required maxlength="3" max="100"
+              [(ngModel)]="rotaPI.piDeComparecimento" #pi="ngModel">
+            <div *ngIf="pi.invalid && (pi.dirty || pi.touched)" class="alert alert-danger">
+              <div *ngIf="pi.errors.required">
+                Campo % PI é obrigatório.
+              </div>
+              <div *ngIf="pi.errors.maxlength">
+                PI deve conter no máximo 3 caracteres
+              </div>
+              <div *ngIf="pi.errors.max">
+                Valor máximo permitido é 100%.
+              </div>
+            </div>
+          </div>
+        </div>
+        <button (click)="add(rotaPI)" class="btn btn-success">Criar</button>
+      </div>
+    </div>
+
+    <div class="card mt-3">
+      <div class="card-header">
+        Registros Cadastrados
+      </div>
+      <div class="card-body">
+        <table id="myTable" class="table" cellspacing="0">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Aeroporto Origem</th>
+              <th>Aeroporto Destino</th>
+              <th>% PI</th>
+              <th>Remover</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let rota of rotas">
+              <td>{{rota.id}}</td>
+              <td>{{rota.aeroportoOrigem}}</td>
+              <td>{{rota.aeroportoDestino}}</td>
+              <td>{{rota.piDeComparecimento}}</td>
+              <td>
+                <button class="btn btn-danger" (click)="deletar(rota);">
+                  Deletar
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

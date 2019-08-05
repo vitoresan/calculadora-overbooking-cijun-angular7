@@ -1,0 +1,49 @@
+<div class="container">
+  <div class="col">
+    <div class="card pt-lg-4 pl-3 pb-lg-2 bg-light">
+      <h2>Gerenciamento de risco de Overbooking</h2>
+    </div>
+    <div class="card mt-3">
+      <div *ngIf="voos" class="card-body">
+        <div class="list-group" *ngFor="let voo of voos">
+          <a href="#" class="list-group-item">
+            <div class="row">
+              <div class="col-3">
+                <label><small>Rota:</small></label>
+                <p><strong>{{voo.rotaVoo}}</strong></p>
+              </div>
+              <div class="col">
+                <label><small>Data:</small></label>
+                <p><strong>{{voo.data | date: 'dd/MM/yyyy'}}</strong></p>
+              </div>
+              <div class="col">
+                <label><small>Dia:</small></label>
+                <p><strong>{{voo.diaSemana.dia}}</strong></p>
+              </div>
+              <div class="col">
+                <label><small>Limite Passageiros:</small></label>
+                <p><strong>{{voo.assentosDisponiveis}}</strong></p>
+              </div>
+              <div class="col">
+                <label><small>Voos Vendidos:</small></label>
+                <p><strong>{{voo.passageirosCadastrados}}</strong></p>
+              </div>
+              <div class="col">
+                <label><small>Risco Overbooking:</small></label>
+                <p><strong>{{voo.riscoOverbooking}}</strong></p>
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+
+      <div *ngIf="!voos" class="card-body">
+        <div class="list-group">
+          <span class="list-group-item">
+            <small>Não existem dados cadastrados para análise de overbooking.</small>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
